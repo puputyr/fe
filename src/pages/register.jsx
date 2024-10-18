@@ -1,8 +1,10 @@
 import Footer from "../component/footer";
 import Hero from "../component/hero";
 import Welcome from "../component/welcome";
+import Register from "../component/register";
 import React from "react";
-function Register() {
+
+function Registerpage() {
     return (
         <>
             <Hero />
@@ -13,4 +15,4 @@ function Register() {
     );
 }
 
-export default Register;
+export default Registerpage;

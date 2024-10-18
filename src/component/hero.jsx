@@ -30,7 +30,7 @@ const Hero = () => {
   };
 
   const handleLoginClick = () => {
-    navigate('/login'); // Navigate to Login page
+    navigate('/register'); // Navigate to Login page
   };
 
   return (
