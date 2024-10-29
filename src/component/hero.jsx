@@ -1,53 +1,37 @@
-// Hero.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import headerImage from '../assets/header.png';
 
 const Hero = () => {
   const navigate = useNavigate(); // Hook for navigation
 
-  const navStyle = {
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    padding: '10px 50px',
-    // background: 'linear-gradient(to bottom, #ffc1e3, #b392ac)',
-  };
-
-  const menuStyle = {
-    display: 'flex',
-    gap: '30px',
-    listStyle: 'none',
-  };
-
-  const buttonStyle = {
-    padding: '10px 20px',
-    backgroundColor: '#5e2b84',
-    color: '#fff',
-    border: 'none',
-    borderRadius: '10px',
-    cursor: 'pointer',
-    fontWeight: 'bold',
-  };
-
   const handleLoginClick = () => {
-    navigate('/register'); // Navigate to Login page
+    navigate('/login'); // Navigate to login page
   };
 
   return (
     <header
-    className='hero' style={navStyle}>
-      <ul style={menuStyle}>
-        <li>Home</li>
-        <li>Tentang Kami</li>
-        <li>Partner</li>
-        <li>Fitur</li>
-        <li>Contact</li>
+      className="flex justify-between items-center p-4 bg-cover bg-opacity-70"
+      style={{ backgroundImage: `url(${headerImage})` }} // Set the background image
+    >
+
+      <ul className="flex space-x-8 text-lg text-stone-900">
+        <li className="hover:text-purple-700 cursor-pointer">Home</li>
+        <li className="hover:text-purple-700 cursor-pointer">Tentang Kami</li>
+        <li className="hover:text-purple-700 cursor-pointer">Partner</li>
+        <li className="hover:text-purple-700 cursor-pointer">Fitur</li>
+        <li className="hover:text-purple-700 cursor-pointer">Contact</li>
       </ul>
-      <button style={buttonStyle} onClick={handleLoginClick}>
+
+      {/* Button */}
+      <button
+        className="px-6 py-2 bg-purple-900 text-white font-bold rounded-lg shadow-md hover:bg-purple-700"
+        onClick={handleLoginClick}
+      >
         Login
       </button>
     </header>
   );
-};
+}; 
 
 export default Hero;

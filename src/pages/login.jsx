@@ -8,7 +8,7 @@ function Loginpage() {
     return (
         <>
             <Hero />
-            <Welcome />
+      <Welcome />
             <Login />
             <Footer />
         </>

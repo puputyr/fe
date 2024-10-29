@@ -1,11 +1,18 @@
 const Footer = () => {
   return (
-    <footer className="bg-gradient-to-b from-purple-800 to-purple-400 text-white py-10 px-6">
-      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-10">
+    <footer
+      className="text-white py-40 bg-cover bg-center"
+      style={{
+        backgroundImage: "url('/footer.png')", // Ensure this path is correct
+        backgroundSize: 'cover', // Keeps the background image covering the footer
+        backgroundPosition: 'center', // Centers the background image
+      }}
+    >
+      <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-4">
         {/* Partner Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Partner</h3>
-          <ul className="space-y-2">
+          <h3 className="text-lg font-semibold mb-4 text-left mt-40">Partner</h3> {/* Adjust the margin as needed */}
+          <ul className="space-y-2 text-left">
             <li>Dinas Kesehatan</li>
             <li>Psikolog</li>
             <li>Petugas Keamanan</li>
@@ -14,26 +21,28 @@ const Footer = () => {
 
         {/* Contact Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Hubungi Kami</h3>
-          <p>Micro Centre</p>
-          <p>Alleysi Block X No. 12</p>
-          <p>Jakarta Selatan, Indonesia</p>
-          <p>+21 2020 5555</p>
+          <h3 className="text-lg font-semibold mb-1 text-left mt-40 ">Hubungi Kami</h3>
+          <p className="text-left">Micro Centre</p>
+          <p className="text-left">Alleysi Block X No. 12</p>
+          <p className="text-left">Jakarta Selatan, Indonesia</p>
+          <p className="text-left">Tel: +21 2020 5555</p>
         </div>
 
         {/* Support Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">Pengaduan dan Dukungan</h3>
-          <p className="mb-4">Submit your email for new updates</p>
+          <h3 className="text-lg font-semibold mb-4 mt-40">Pengaduan dan Dukungan</h3>
+          <p className="mb-4">Submit your email for new updates:</p>
           <form className="flex">
             <input
               type="email"
               placeholder="Your email address"
               className="p-2 rounded-l-lg border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 flex-grow"
+              aria-label="Email address"
             />
             <button
               type="submit"
               className="px-4 py-2 bg-purple-700 hover:bg-purple-600 text-white font-bold rounded-r-lg"
+              aria-label="Submit email"
             >
               Submit
             </button>
@@ -42,7 +51,7 @@ const Footer = () => {
       </div>
 
       {/* Copyright Section */}
-      <div className="border-t border-gray-300 mt-10 pt-4 text-center text-sm">
+      <div className="border-t border-gray-300 mt-5 pt-4 text-center text-sm">
         2024 Copyright Micro by Aisee. All Rights Reserved.
       </div>
     </footer>
