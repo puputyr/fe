@@ -1,12 +1,12 @@
 import Navbar from "../component/navbar";
-import Tablehistori from "../component/tablehistori";
+import Histori from "../component/histori";
+import React from "react";
 
 function History() {
     return (
         <>
             <Navbar />
-            <Tablehistori />
-          
+            <Histori />
         </>
     );
 }

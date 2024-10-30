@@ -4,6 +4,7 @@ import Landingpage from "./pages/landingpage";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import History from "./pages/history";
+import Pengaduan from "./pages/pengaduan";
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/history" element={<History />} />
+          <Route path="/pengaduan" element={<Pengaduan />} />
         </Routes>
       </div>
     </Router>
