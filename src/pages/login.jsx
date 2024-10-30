@@ -8,8 +8,8 @@ function Loginpage() {
     return (
         <>
             <Hero />
-      <Welcome />
             <Login />
+            <Welcome />
             <Footer />
         </>
     );

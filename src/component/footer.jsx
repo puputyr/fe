@@ -51,7 +51,7 @@ const Footer = () => {
       </div>
 
       {/* Copyright Section */}
-      <div className="border-t border-gray-300 mt-5 pt-4 text-center text-sm">
+      <div className="border-t border-black mt-5 pt-4 text-center text-black">
         2024 Copyright Micro by Aisee. All Rights Reserved.
       </div>
     </footer>
