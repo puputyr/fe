@@ -4,7 +4,10 @@ import Landingpage from "./pages/landingpage";
 import Login from "./pages/login";
 import Register from "./pages/register";
 import History from "./pages/history";
-import Pengaduan from "./pages/pengaduan";
+import Pengaduantim from "./pages/pengaduantim";
+import Pengaduan_anonymous from "./pages/pengaduan_anonymous";
+import Halpeta from "./pages/halpeta";
+import 'leaflet/dist/leaflet.css';
 
 function App() {
   return (
@@ -15,7 +18,9 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
           <Route path="/history" element={<History />} />
-          <Route path="/pengaduan" element={<Pengaduan />} />
+          <Route path="/pengaduantim" element={<Pengaduantim />} />
+          <Route path="/pengaduan_anonymous" element={<Pengaduan_anonymous />} /> 
+          <Route path="/halpeta" element={<Halpeta />} />
         </Routes>
       </div>
     </Router>

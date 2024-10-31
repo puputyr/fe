@@ -9,7 +9,7 @@ function Feature() {
 
       {/* Peta Interaktif */}
       <div className="Item w-60 h-72 left-0 top-[89.85px] absolute">
-        <Link to="/peta">
+        <Link to="/halpeta">
           <div
             className="Bg w-60 h-72 flex items-center justify-center"
             style={{
@@ -53,7 +53,7 @@ function Feature() {
 
       {/* Dukungan */}
       <div className="Item w-60 h-72 left-[573.20px] top-[89.85px] absolute">
-        <Link to="/pengaduan">
+        <Link to="/pengaduantim">
           <div
             className="Bg w-60 h-72 flex items-center justify-center"
             style={{
