@@ -3,12 +3,12 @@ import Histori from "../component/histori";
 import React from "react";
 
 function History() {
-    return (
-        <>
-            <Navbar />
-            <Histori />
-        </>
-    );
+  return (
+    <div className="flex ">
+      <Navbar />
+      <Histori />
+    </div>
+  );
 }
 
 export default History;

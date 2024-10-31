@@ -1,17 +1,21 @@
 const Footer = () => {
   return (
     <footer
+      id="footer"
       className="text-white py-40 bg-cover bg-center"
       style={{
         backgroundImage: "url('/footer.png')", // Ensure this path is correct
-        backgroundSize: 'cover', // Keeps the background image covering the footer
-        backgroundPosition: 'center', // Centers the background image
+        backgroundSize: "cover", // Keeps the background image covering the footer
+        backgroundPosition: "center", // Centers the background image
       }}
     >
       <div className="container mx-auto grid grid-cols-1 md:grid-cols-3 gap-10 px-4">
         {/* Partner Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-4 text-left mt-40">Partner</h3> {/* Adjust the margin as needed */}
+          <h3 className="text-lg font-semibold mb-4 text-left mt-40">
+            Partner
+          </h3>{" "}
+          {/* Adjust the margin as needed */}
           <ul className="space-y-2 text-left">
             <li>Dinas Kesehatan</li>
             <li>Psikolog</li>
@@ -21,7 +25,9 @@ const Footer = () => {
 
         {/* Contact Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-1 text-left mt-40 ">Hubungi Kami</h3>
+          <h3 className="text-lg font-semibold mb-1 text-left mt-40 ">
+            Hubungi Kami
+          </h3>
           <p className="text-left">Micro Centre</p>
           <p className="text-left">Alleysi Block X No. 12</p>
           <p className="text-left">Jakarta Selatan, Indonesia</p>
@@ -30,7 +36,9 @@ const Footer = () => {
 
         {/* Support Section */}
         <div>
-          <h3 className="text-lg font-semibold mb-4 mt-40">Pengaduan dan Dukungan</h3>
+          <h3 className="text-lg font-semibold mb-4 mt-40">
+            Pengaduan dan Dukungan
+          </h3>
           <p className="mb-4">Submit your email for new updates:</p>
           <form className="flex">
             <input

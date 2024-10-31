@@ -4,9 +4,9 @@ import Chat from "../component/chatbubble";
 import Inputchat from "../component/inputchat";
 import Opsichat from "../component/opsichat";
 
-function Pengaduan_anonymous() {
+function PengaduanAnonymous() {
   return (
-    <> 
+    <>
       <Laporananonymous />
       <Chat />
       <Opsichat />
@@ -14,4 +14,4 @@ function Pengaduan_anonymous() {
     </>
   );
 }
-export default Pengaduan_anonymous;
+export default PengaduanAnonymous;

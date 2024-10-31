@@ -13,24 +13,39 @@ const Hero = () => {
     navigate(path);
   };
 
+  const navigation = [
+    { name: "Home", path: "/" },
+    { name: "Tentang Kami", path: "/welcome.jsx" },
+    { name: "Partner", path: "/partner.jsx" },
+    { name: "Fitur", path: "/features.jsx" },
+    {
+      name: "Contact",
+      path: "/footer.jsx",
+      onClick: () => {
+        const footer = document.getElementById("footer");
+        return footer?.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+          inline: "nearest",
+        });
+      },
+    },
+  ];
+
   return (
     <div
-      className="hero-container flex flex-col min-h-screen text-white bg-cover bg-center"
+      className="hero-container flex flex-col h-screen relative text-white bg-cover lg:bg-contain py-10"
       style={{ backgroundImage: `url('/header.png')` }}
     >
       {/* Navbar Section */}
       <nav className="navbar absolute top-0 left-0 w-full flex items-center justify-between px-12 py-6">
         <div className="flex space-x-12">
-          {[
-            { name: "Home", path: "/" },
-            { name: "Tentang Kami", path: "/welcome.jsx" },
-            { name: "Partner", path: "/partner.jsx" },
-            { name: "Fitur", path: "/features.jsx" },
-            { name: "Contact", path: "/footer.jsx" }
-          ].map((item, index) => (
+          {navigation.map((item, index) => (
             <div
               key={index}
-              onClick={() => handleNavClick(item.path)} // Add onClick for navigation
+              onClick={() =>
+                item.onClick ? item.onClick() : handleNavClick(item.path)
+              }
               className="text-2xl font-medium text-stone-900 cursor-pointer hover:underline"
             >
               {item.name}
@@ -46,7 +61,6 @@ const Hero = () => {
       </nav>
       {/* Tagline Section */}
       <div className="flex items-center justify-between px-12 mt-40">
-        {/* Text Content */}
         <div className="tagline text-left space-y-4 mb-8 max-w-lg">
           <h1 className="text-6xl font-bold font-['Inter']">
             Selamat datang di Aisee
@@ -59,12 +73,8 @@ const Hero = () => {
           </p>
         </div>
 
-        {/* Image Section */}
         <div className="image-container flex-shrink-0">
-          <img
-            src="/pictcctv.png"
-            alt="Illustration"
-          />
+          <img src="/pictcctv.png" alt="Illustration" />
         </div>
       </div>
     </div>
