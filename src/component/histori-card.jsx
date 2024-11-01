@@ -25,7 +25,7 @@ const HistoryCard = () => {
       </div>
       <div className="Btn w-36 h-12 px-4 py-2.5 left-[866px] top-[25px]  bg-purple-900 rounded-xl justify-center items-center gap-2 inline-flex">
         <div className="Container justify-center items-center gap-3 flex">
-          <div className="Text text-white text-base font-semibold font-['Inter'] leading-7">
+          <div className="Text text-white font-semibold font-['Inter'] leading-7">
             Lihat Cctv
           </div>
         </div>

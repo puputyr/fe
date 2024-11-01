@@ -1,5 +1,5 @@
 import Hero from "../component/hero";
-import Content from "../component/tagline";
+import Content from "../component/tableadmin";
 import Welcome from "../component/welcome";
 import Partner from "../component/partner";
 import Feature from "../component/feature";

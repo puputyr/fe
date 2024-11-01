@@ -1,4 +1,8 @@
 function Login() {
+  const handleLogin = () => {
+    // Logika autentikasi login
+    onLoginSuccess(); // Panggil fungsi ini jika login berhasil
+  };
   return (
     <div className="RegistrasiWeb w-96 h-auto mx-auto mt-10 p-6">
     <div className="w-full mb-4">

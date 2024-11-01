@@ -1,6 +1,6 @@
 function Partner() {
   return (
-    <div className="partner-container flex flex-col gap-10 items-center">
+    <div id="partner" className="partner-container flex flex-col gap-10 items-center">
       <div className="component flex gap-6 justify-center items-start">
         <div className="frame flex-1 bg-white p-4 flex justify-center items-center">
           <img

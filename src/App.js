@@ -7,6 +7,7 @@ import History from "./pages/history";
 import Pengaduantim from "./pages/pengaduantim";
 import PengaduanAnonymous from "./pages/pengaduanAnonymous";
 import Halpeta from "./pages/halpeta";
+// import Admin from "./pages/admin";
 import "leaflet/dist/leaflet.css";
 
 function App() {
@@ -21,6 +22,7 @@ function App() {
           <Route path="/pengaduantim" element={<Pengaduantim />} />
           <Route path="/pengaduan_anonymous" element={<PengaduanAnonymous />} />
           <Route path="/halpeta" element={<Halpeta />} />
+          {/* <Route path="/admin" element={<Admin />} /> */}
         </Routes>
       </div>
     </Router>

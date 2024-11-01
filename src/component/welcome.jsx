@@ -1,7 +1,7 @@
 function Welcome() {
   return (
-    <div className="flex justify-center items-center min-h-screen">
-      <div className="w-full max-w-7xl p-8">
+    <div id="about" className="flex flex-col justify-center items-center p-20">
+      <div className="w-full max-w-5xl p-10">
         {/* Header Section */}
         <div className="text-2xl font-medium font-['Poppins'] mb-4">
           <span className="text-stone-900">About</span>

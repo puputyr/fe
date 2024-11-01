@@ -2,8 +2,8 @@ import { Link } from "react-router-dom";
 
 function Feature() {
   return (
-    <div className="w-full h-fit relative">
-      <div className="text-center h-12  text-stone-900 text-2xl font-medium font-['Poppins']">
+    <div id="fitur" className="w-full h-fit relative">
+      <div className="text-left h-12 ml-44 text-stone-900 text-2xl font-medium font-['Poppins']" style={{ marginLeft: '27rem' }}>
         Fitur
       </div>
 
