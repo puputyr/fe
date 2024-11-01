@@ -5,7 +5,7 @@ const Hero = () => {
   const navigate = useNavigate(); // Hook for navigation
 
   const handleLoginClick = () => {
-    navigate("/login"); // Navigate to login page
+    navigate("/login"); // EVENT HANDLER
   };
 
   // Function to handle navigation based on the item clicked
