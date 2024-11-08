@@ -2,9 +2,9 @@ import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 
 function Peta() {
     return (
-        <div style={{ position: 'relative', height: '100vh' }}>
+        <div style={{ position: 'relative', height: '100px' }}>
             <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'flex-start', height: '100%' }}>
-                <div style={{ width: '1800px', overflow: 'hidden', position: 'absolute', top: '-800px', left: '278px', zIndex: 1 }}>
+                <div style={{ width: '1800px', overflow: 'hidden', top: '-800px', left: '278px', zIndex: 1 }}>
                     <div style={{ padding: '10px' }}>
                         <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false} style={{ height: '700px', width: '100%' }}>
                             <TileLayer
