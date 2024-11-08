@@ -1,17 +1,22 @@
 import React from "react";
-import Laporananonymous from "../component/laporananonymous";
+import Navbar from "../component/navbar";
 import Chat from "../component/chatbubble";
-import Inputchat from "../component/inputchat";
-import Opsichat from "../component/opsichat";
+import ChatList from "../component/ChatList";
 
 function PengaduanAnonymous() {
   return (
-    <>
-      <Laporananonymous />
-      <Chat />
-      <Opsichat />
-      <Inputchat />
-    </>
+    <div className="flex w-full">
+      <div
+        className="flex
+     "
+      >
+        <Navbar />
+        <ChatList />
+      </div>
+      <div className="w-full">
+        <Chat />
+      </div>
+    </div>
   );
 }
 export default PengaduanAnonymous;
