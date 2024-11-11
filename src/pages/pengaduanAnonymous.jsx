@@ -2,8 +2,9 @@ import React from "react";
 import Navbar from "../component/navbar";
 import Chat from "../component/chatbubble";
 import ChatList from "../component/ChatList";
+import Opsichat from "../component/opsichat";
 
-function PengaduanAnonymous() {
+function Pengaduananonymous() {
   return (
     <div className="flex w-full">
       <div
@@ -16,7 +17,8 @@ function PengaduanAnonymous() {
       <div className="w-full">
         <Chat />
       </div>
+      <Opsichat />
     </div>
   );
 }
-export default PengaduanAnonymous;
+export default Pengaduananonymous;

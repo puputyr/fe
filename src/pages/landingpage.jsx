@@ -1,5 +1,4 @@
 import Hero from "../component/hero";
-import Content from "../component/tableadmin";
 import Welcome from "../component/welcome";
 import Partner from "../component/partner";
 import Feature from "../component/feature";
@@ -14,7 +13,6 @@ function LandingPage() {
             <Partner />
             <Welcome />
             <Feature />
-            <Content />
             <Footer />
         </>
     );

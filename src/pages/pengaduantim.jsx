@@ -1,17 +1,22 @@
 import React from "react";
 import Navbar from "../component/navbar";
-import Laporan from "../component/laporan";
 import Chat from "../component/chatbubble";
-import Inputchat from "../component/inputchat";
+import ChatList from "../component/ChatList";
 
-function Pengaduan() {
+function pengaduantim() {
   return (
-    <>
-      <Navbar />
-      <Laporan />
-      <Chat />
-      <Inputchat />
-    </>
+    <div className="flex w-full">
+      <div
+        className="flex
+     "
+      >
+        <Navbar />
+        <ChatList />
+      </div>
+      <div className="w-full">
+        <Chat />
+      </div>
+    </div>
   );
 }
-export default Pengaduan;
+export default pengaduantim;

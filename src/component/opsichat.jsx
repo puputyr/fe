@@ -1,6 +1,6 @@
 function Opsichat() {
     return (
-        <>
+        <div>
             <div className="Btn w-72 h-7 px-2 py-0.5 bg-white rounded border border-stone-700 justify-center items-center gap-1 inline-flex">
                 <div className="Container grow shrink basis-0 h-5 justify-center items-center gap-1 flex">
                     <div className="Text text-stone-700 text-lg font-normal font-['Inter'] leading-tight">
@@ -22,7 +22,7 @@ function Opsichat() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
 

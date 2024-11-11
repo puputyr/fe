@@ -10,7 +10,10 @@ function Welcome() {
         </div>
 
         {/* Description Section */}
-        <div className="text-slate-500 text-lg font-normal font-['Poppins'] leading-loose">
+        <div
+          className="text-slate-500 text-lg font-normal font-['Poppins'] leading-loose"
+          style={{ textAlign: "justify" }}
+        >
           Di Aisee Initiative, kami berkomitmen untuk menggunakan teknologi demi
           menyelamatkan nyawa dengan mencegah tindakan bunuh diri di ruang publik.
           Misi kami adalah menciptakan solusi inovatif berbasis kecerdasan buatan
