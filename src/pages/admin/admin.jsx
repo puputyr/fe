@@ -1,6 +1,6 @@
 import React from "react";
-import Navbar from "../component/navbar";
-import Tableadmin from "../component/tableadmin";
+import Navbar from "../../component/navbar";
+import Tableadmin from "../../component/tableadmin";
 
 function Admin() {
     return (
@@ -10,5 +10,5 @@ function Admin() {
         </>
     );
 }
-
+ 
 export default Admin;
