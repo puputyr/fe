@@ -121,7 +121,7 @@ function Feature() {
           onMouseEnter={() => handleMouseEnter("PolaPerilaku")}
           onMouseLeave={handleMouseLeave}
         >
-          <Link to="/perilaku">
+          <Link to="/history">
             <div
               className="Bg w-60 h-72 flex items-center justify-center"
               style={{

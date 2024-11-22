@@ -23,7 +23,7 @@ function App() {
           <Route path="/pengaduananonymous" element={<Pengaduananonymous />} />
           <Route path="/halpeta" element={<Halpeta />} />
           <Route path="/landingpage" element={<Landingpage />} />
-          <Route path="/admin/dasbor" element={<Admin />} /> 
+          <Route path="/pages/admin" element={<Admin />} /> 
         </Routes>
       </div>
     </Router>
