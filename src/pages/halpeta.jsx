@@ -4,9 +4,11 @@ import Navbar from "../component/navbar";
 import Judulpeta from "../component/judulpeta";
 
 function Halpeta() {
+  const halaman = "Peta Interaktif"
+
   return (
     <div className="flex">
-      <Navbar />
+      <Navbar halaman={halaman} />
       <div className="w-full h-screen">
         <div className="h-24 flex items-center fixed z-50 bg-white/50 top-0 px-24 w-full">
           <Judulpeta />

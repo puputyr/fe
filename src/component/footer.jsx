@@ -4,7 +4,7 @@ const Footer = () => {
       id="footer"
       className="text-white py-40 bg-cover bg-center"
       style={{
-        backgroundImage: "url('/footer.png')", // Ensure this path is correct
+        backgroundImage: "url('/footer.svg')", // Ensure this path is correct
         backgroundSize: "cover", // Keeps the background image covering the footer
         backgroundPosition: "center", // Centers the background image
       }}

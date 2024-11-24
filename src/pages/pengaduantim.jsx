@@ -7,8 +7,7 @@ function pengaduantim() {
   return (
     <div className="flex w-full">
       <div
-        className="flex
-     "
+        className="flex"
       >
         <Navbar />
         <ChatList />

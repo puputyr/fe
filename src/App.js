@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Landingpage from "./pages/landingpage";
-import Register from "./pages/register";
+import Register from "./pages/halregister";
 import History from "./pages/history";
 import Pengaduantim from "./pages/pengaduantim";
 import Pengaduananonymous from "./pages/pengaduananonymous";
@@ -17,7 +17,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Landingpage />} />
           <Route path="/login" element={<Loginpage />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/halregister" element={<Register />} />
           <Route path="/history" element={<History />} />
           <Route path="/pengaduantim" element={<Pengaduantim />} />
           <Route path="/pengaduananonymous" element={<Pengaduananonymous />} />
