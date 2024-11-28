@@ -1,7 +1,7 @@
 import React from "react";
-import Navbar from "../component/navbar";
 import Chat from "../component/chatbubble";
 import ChatList from "../component/ChatList";
+import Navbar_User from "../component/navbaruser";
 
 function pengaduantim() {
   return (
@@ -9,7 +9,7 @@ function pengaduantim() {
       <div
         className="flex"
       >
-        <Navbar />
+        <Navbar_User />
         <ChatList />
       </div>
       <div className="w-full">

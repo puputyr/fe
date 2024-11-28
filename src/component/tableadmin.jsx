@@ -1,705 +1,199 @@
-function Tableadmin() {
-  return(
-<div className="Table w-96 h-96 bg-color-0 rounded-xl shadow border border-color-10 flex-col justify-start items-start gap-2.5 inline-flex">
-  <div className="Table self-stretch h-96 flex-col justify-start items-start flex">
-    <div className="Header self-stretch p-3.5 justify-end items-start gap-3.5 inline-flex">
-      <div className="Buttons justify-start items-center gap-3.5 flex">
-        <div className="Btn px-4 py-1.5 bg-Color1 rounded-lg border border-cream justify-center items-center gap-2 flex">
-          <div className="Container justify-center items-center gap-2 flex">
-            <div className="Text text-cream text-sm font-semibold font-['Inter'] leading-normal">Psikolog</div>
-            <div className="IcDropDown w-4 h-4 px-1 py-1.5 justify-center items-center flex" />
-          </div>
-        </div>
-        <div className="Input h-9 px-3 py-1.5 bg-color-0 rounded-lg border border-color-50 justify-center items-center gap-2.5 flex">
-          <div className="Container grow shrink basis-0 h-6 justify-between items-center flex">
-            <div className="Text grow shrink basis-0 text-color-200 text-sm font-normal font-['Inter'] leading-normal">Search</div>
-          </div>
-        </div>
+import React, { useState } from "react";
+
+const TableAdmin = () => {
+  const initialEntries = [
+    { no: 1, name: "Ahnya", email: "Putyasn@gmail.com", city: "Tang City Club", role: "Tim Medis", status: "Active" },
+    { no: 2, name: "PT B", email: "Putyasn@gmail.com", city: "Grand City Mall Surabaya Club", role: "Tim Keamanan", status: "Inactive" },
+    { no: 3, name: "Charlie Van Hoten", email: "Putyasn@gmail.com", city: "Grand City Mall Surabaya Club", role: "Psikolog", status: "Active" },
+    { no: 4, name: "Diana", email: "diana@gmail.com", city: "Jakarta City", role: "Tim Medis", status: "Inactive" },
+    { no: 5, name: "Eka", email: "eka@gmail.com", city: "Bandung Club", role: "Psikolog", status: "Active" },
+    { no: 6, name: "Fiona", email: "fiona@gmail.com", city: "Jakarta City Club", role: "Tim Keamanan", status: "Inactive" },
+    { no: 7, name: "Garry", email: "garry@gmail.com", city: "Surabaya City Club", role: "Psikolog", status: "Active" },
+    { no: 8, name: "Hanna", email: "hanna@gmail.com", city: "Bandung City", role: "Tim Medis", status: "Active" },
+    { no: 9, name: "Ivan", email: "ivan@gmail.com", city: "Malang Club", role: "Tim Keamanan", status: "Inactive" },
+    { no: 10, name: "Jack", email: "jack@gmail.com", city: "Depok City Club", role: "Psikolog", status: "Active" },
+    { no: 11, name: "Karen", email: "karen@gmail.com", city: "Bali City Club", role: "Tim Medis", status: "Inactive" },
+    { no: 12, name: "Leon", email: "leon@gmail.com", city: "Jakarta Club", role: "Tim Keamanan", status: "Active" },
+    { no: 13, name: "Mia", email: "mia@gmail.com", city: "Surabaya City", role: "Psikolog", status: "Active" },
+    { no: 14, name: "Nina", email: "nina@gmail.com", city: "Jakarta City Club", role: "Tim Medis", status: "Inactive" },
+    { no: 15, name: "Oscar", email: "oscar@gmail.com", city: "Bandung Club", role: "Tim Keamanan", status: "Active" },
+    { no: 16, name: "Paul", email: "paul@gmail.com", city: "Tang City Club", role: "Psikolog", status: "Inactive" },
+    { no: 17, name: "Quincy", email: "quincy@gmail.com", city: "Jakarta Club", role: "Tim Medis", status: "Active" },
+    { no: 18, name: "Rachel", email: "rachel@gmail.com", city: "Depok Club", role: "Tim Keamanan", status: "Inactive" },
+    { no: 19, name: "Steven", email: "steven@gmail.com", city: "Surabaya Club", role: "Psikolog", status: "Active" },
+    { no: 20, name: "Tina", email: "tina@gmail.com", city: "Bali City Club", role: "Tim Medis", status: "Active" },
+    { no: 21, name: "Uma", email: "uma@gmail.com", city: "Jakarta Club", role: "Tim Keamanan", status: "Inactive" },
+    { no: 22, name: "Victor", email: "victor@gmail.com", city: "Bandung Club", role: "Psikolog", status: "Active" },
+    { no: 23, name: "Wendy", email: "wendy@gmail.com", city: "Tang City Club", role: "Tim Medis", status: "Inactive" },
+    { no: 24, name: "Xander", email: "xander@gmail.com", city: "Malang Club", role: "Tim Keamanan", status: "Active" },
+    { no: 25, name: "Yara", email: "yara@gmail.com", city: "Depok Club", role: "Psikolog", status: "Active" },
+    { no: 26, name: "Zara", email: "zara@gmail.com", city: "Bali Club", role: "Tim Medis", status: "Inactive" },
+    { no: 27, name: "Abby", email: "abby@gmail.com", city: "Jakarta Club", role: "Tim Keamanan", status: "Active" },
+    { no: 28, name: "Bella", email: "bella@gmail.com", city: "Bandung Club", role: "Psikolog", status: "Inactive" },
+    { no: 29, name: "Chris", email: "chris@gmail.com", city: "Tang City Club", role: "Tim Medis", status: "Active" },
+    { no: 30, name: "Derek", email: "derek@gmail.com", city: "Malang Club", role: "Tim Keamanan", status: "Inactive" },
+    // Tambahkan data lainnya di sini
+  ];
+
+  const [entries] = useState(initialEntries);
+  const [filteredEntries, setFilteredEntries] = useState(initialEntries);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [entriesPerPage, setEntriesPerPage] = useState(10);
+  const [selectedRole, setSelectedRole] = useState("");
+
+  // Hitung data berdasarkan pagination
+  const indexOfLastEntry = currentPage * entriesPerPage;
+  const indexOfFirstEntry = indexOfLastEntry - entriesPerPage;
+  const currentEntries = filteredEntries.slice(indexOfFirstEntry, indexOfLastEntry);
+
+  // Fungsi untuk berpindah halaman
+  const handleNextPage = () => {
+    if (currentPage < Math.ceil(filteredEntries.length / entriesPerPage)) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePreviousPage = () => {
+    if (currentPage > 1) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
+
+  // Fungsi untuk mengubah jumlah data per halaman
+  const handleEntriesPerPageChange = (e) => {
+    setEntriesPerPage(Number(e.target.value));
+    setCurrentPage(1); // Reset ke halaman pertama
+  };
+
+  // Fungsi untuk filter berdasarkan role
+  const handleRoleChange = (e) => {
+    const role = e.target.value;
+    setSelectedRole(role);
+    filterEntries(searchQuery, role);
+    setCurrentPage(1); // Reset ke halaman pertama
+  };
+
+  // Fungsi untuk search
+  const handleSearchChange = (e) => {
+    const query = e.target.value.toLowerCase();
+    setSearchQuery(query);
+    filterEntries(query, selectedRole);
+    setCurrentPage(1); // Reset ke halaman pertama
+  };
+
+  const filterEntries = (query, role) => {
+    let filtered = entries;
+
+    if (role) {
+      filtered = filtered.filter((entry) => entry.role === role);
+    }
+
+    if (query) {
+      filtered = filtered.filter(
+        (entry) =>
+          entry.name.toLowerCase().includes(query) ||
+          entry.email.toLowerCase().includes(query) ||
+          entry.city.toLowerCase().includes(query)
+      );
+    }
+
+    setFilteredEntries(filtered);
+  };
+
+  return (
+    <div className="p-6 w-full h-screen overflow-scroll">
+      <h1 className="text-2xl font-semibold mb-4">Data Admin</h1>
+      <div className="flex justify-between items-center mb-4">
+        <select
+          className="bg-purple-900 text-white border border-gray-300 rounded px-4 py-2"
+          value={selectedRole}
+          onChange={handleRoleChange}
+        >
+          <option value="">Semua Role</option>
+          <option value="Psikolog">Psikolog</option>
+          <option value="Tim Medis">Tim Medis</option>
+          <option value="Tim Keamanan">Tim Keamanan</option>
+        </select>
+        <input
+          type="text"
+          placeholder="Search"
+          value={searchQuery}
+          onChange={handleSearchChange}
+          className="border border-gray-300 rounded px-4 py-2"
+        />
+        <button className="bg-purple-900 text-white px-4 py-2 rounded">+ Admin</button>
       </div>
-      <div className="Btn px-4 py-1.5 bg-Color1 rounded-lg justify-center items-center gap-2 flex">
-        <div className="Container justify-center items-center gap-2 flex">
-          <div className="IcAdd w-4 h-4 justify-center items-center flex" />
-          <div className="Text text-color-0 text-sm font-semibold font-['Inter'] leading-normal">Admin</div>
-        </div>
-      </div>
-    </div>
-    <div className="TableHeader self-stretch justify-start items-start inline-flex">
-      <div className="Th w-4 h-12 relative bg-color-10" />
-      <div className="Th px-4 py-3.5 bg-color-10 justify-start items-center gap-2 flex">
-        <div className="Team text-center text-color-600 text-xs font-semibold font-['Inter'] leading-tight">No</div>
-      </div>
-      <div className="Th grow shrink basis-0 h-12 px-4 py-3.5 bg-color-10 justify-start items-center gap-2 flex">
-        <div className="Team text-center text-color-600 text-xs font-semibold font-['Inter'] leading-tight">Name</div>
-      </div>
-      <div className="Th grow shrink basis-0 h-12 px-4 py-3.5 bg-color-10 justify-start items-center gap-2 flex">
-        <div className="Team text-center text-color-600 text-xs font-semibold font-['Inter'] leading-tight">Email</div>
-      </div>
-      <div className="Th grow shrink basis-0 h-12 px-4 py-3.5 bg-color-10 justify-start items-center gap-2 flex">
-        <div className="Team text-center text-color-600 text-xs font-semibold font-['Inter'] leading-tight">Kota</div>
-      </div>
-      <div className="Th h-12 px-4 py-3.5 bg-color-10 justify-start items-center gap-2 flex">
-        <div className="Team text-center text-color-600 text-xs font-semibold font-['Inter'] leading-tight">Role</div>
-      </div>
-      <div className="Th h-12 px-4 py-3.5 bg-color-10 justify-start items-center gap-2 flex">
-        <div className="Team text-center text-color-600 text-xs font-semibold font-['Inter'] leading-tight">Status</div>
-      </div>
-      <div className="Th w-16 h-12 relative bg-color-10" />
-    </div>
-    <div className="TableContent self-stretch justify-start items-start inline-flex">
-      <div className="Row flex-col justify-start items-start inline-flex">
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row w-12 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">1</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">2</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">3</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row grow shrink basis-0 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Ahnya</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">PT B</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Charlie Van Hoten</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row grow shrink basis-0 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Putyasn@gmail.com</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Putyasn@gmail.com</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Putyasn@gmail.com</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row grow shrink basis-0 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Tang City Club</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Grand City Mall Surabaya Club</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Grand City Mall Surabaya Club</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row w-28 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges px-2 py-0.5 bg-green-600/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-center items-center gap-2 flex">
-                <div className="Text text-center text-success text-xs font-semibold font-['Inter'] leading-tight">Tim Meedis</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges pl-1.5 pr-2 py-0.5 bg-neutral-800/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-start items-center gap-1.5 flex">
-                <div className="Text text-color-900 text-xs font-semibold font-['Inter'] leading-tight">Tim keamanan</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges px-2 py-0.5 bg-green-600/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-center items-center gap-2 flex">
-                <div className="Text text-center text-success text-xs font-semibold font-['Inter'] leading-tight">Tim Medis</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row w-28 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges px-2 py-0.5 bg-green-600/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-center items-center gap-2 flex">
-                <div className="Text text-center text-success text-xs font-semibold font-['Inter'] leading-tight">Active</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges pl-1.5 pr-2 py-0.5 bg-neutral-800/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-start items-center gap-1.5 flex">
-                <div className="Text text-color-900 text-xs font-semibold font-['Inter'] leading-tight">Inactive</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges px-2 py-0.5 bg-green-600/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-center items-center gap-2 flex">
-                <div className="Text text-center text-success text-xs font-semibold font-['Inter'] leading-tight">Active</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row w-14 bg-Color1 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-white border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Btn w-6 h-6 px-2 py-0.5 bg-white rounded border border-Color1 justify-center items-center gap-1 flex">
-              <div className="Container justify-center items-center gap-1 flex">
-                <div className="IcMagnifier w-3 h-3 justify-center items-center flex" />
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-white border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Btn w-6 h-6 px-2 py-0.5 bg-white rounded border border-red-800 justify-center items-center gap-1 flex">
-              <div className="Container justify-center items-center gap-1 flex">
-                <div className="IcMagnifier w-3 h-3 justify-center items-center flex" />
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-white border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Btn w-6 h-6 px-2 py-0.5 bg-white rounded border border-red-800 justify-center items-center gap-1 flex">
-              <div className="Container justify-center items-center gap-1 flex">
-                <div className="IcMagnifier w-3 h-3 justify-center items-center flex" />
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row flex-col justify-start items-start inline-flex">
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
+      <table className="table-auto w-full border-collapse border border-gray-300">
+        <thead>
+          <tr className="bg-gray-100">
+            <th className="border border-gray-300 px-4 py-2">No</th>
+            <th className="border border-gray-300 px-4 py-2">Name</th>
+            <th className="border border-gray-300 px-4 py-2">Email</th>
+            <th className="border border-gray-300 px-4 py-2">Kota</th>
+            <th className="border border-gray-300 px-4 py-2">Role</th>
+            <th className="border border-gray-300 px-4 py-2">Status</th>
+            <th className="border border-gray-300 px-4 py-2">Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          {currentEntries.map((entry, index) => (
+            <tr key={index} className="text-center">
+              <td className="border border-gray-300 px-4 py-2">{entry.no}</td>
+              <td className="border border-gray-300 px-4 py-2">{entry.name}</td>
+              <td className="border border-gray-300 px-4 py-2">{entry.email}</td>
+              <td className="border border-gray-300 px-4 py-2">{entry.city}</td>
+              <td className="border border-gray-300 px-4 py-2">{entry.role}</td>
+              <td className="border border-gray-300 px-4 py-2">
+                <span
+                  className={`px-2 py-1 rounded ${
+                    entry.status === "Active"
+                      ? "bg-green-200 text-green-800"
+                      : "bg-red-200 text-red-800"
+                  }`}
+                >
+                  {entry.status}
+                </span>
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                <button className="text-blue-600">🔍</button>
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+      <div className="mt-4 flex justify-between items-center">
+        <select
+          className="border border-gray-300 rounded px-4 py-2"
+          value={entriesPerPage}
+          onChange={handleEntriesPerPageChange}
+        >
+          <option value={10}>10</option>
+          <option value={20}>20</option>
+          <option value={30}>30</option>
+        </select>
+        <span>
+          Showing {indexOfFirstEntry + 1} to {Math.min(indexOfLastEntry, filteredEntries.length)} of {filteredEntries.length} entries
+        </span>
+        <div>
+          <button
+            className="px-4 py-2 border border-gray-300 rounded mr-2"
+            onClick={handlePreviousPage}
+            disabled={currentPage === 1}
+          >
+            Previous
+          </button>
+          <button
+            className="px-4 py-2 border border-gray-300 rounded"
+            onClick={handleNextPage}
+            disabled={currentPage === Math.ceil(filteredEntries.length / entriesPerPage)}
+          >
+            Next
+          </button>
         </div>
       </div>
     </div>
-    <div className="TableContent self-stretch justify-start items-start inline-flex">
-      <div className="Row flex-col justify-start items-start inline-flex">
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row w-12 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">1</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">2</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">3</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row grow shrink basis-0 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Ahnya</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">PT B</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Charlie Van Hoten</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row grow shrink basis-0 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Putyasn@gmail.com</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Putyasn@gmail.com</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Putyasn@gmail.com</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row grow shrink basis-0 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Tang City Club</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Grand City Mall Surabaya Club</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Grand City Mall Surabaya Club</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row w-28 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges px-2 py-0.5 bg-green-600/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-center items-center gap-2 flex">
-                <div className="Text text-center text-success text-xs font-semibold font-['Inter'] leading-tight">Tim Medis</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges pl-1.5 pr-2 py-0.5 bg-neutral-800/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-start items-center gap-1.5 flex">
-                <div className="Text text-color-900 text-xs font-semibold font-['Inter'] leading-tight">Psikolog</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges px-2 py-0.5 bg-green-600/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-center items-center gap-2 flex">
-                <div className="Text text-center text-success text-xs font-semibold font-['Inter'] leading-tight">Tim Medis</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row w-28 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges px-2 py-0.5 bg-green-600/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-center items-center gap-2 flex">
-                <div className="Text text-center text-success text-xs font-semibold font-['Inter'] leading-tight">Active</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges pl-1.5 pr-2 py-0.5 bg-neutral-800/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-start items-center gap-1.5 flex">
-                <div className="Text text-color-900 text-xs font-semibold font-['Inter'] leading-tight">Inactive</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges px-2 py-0.5 bg-green-600/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-center items-center gap-2 flex">
-                <div className="Text text-center text-success text-xs font-semibold font-['Inter'] leading-tight">Active</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row w-14 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Btn w-6 h-6 px-2 py-0.5 bg-color-0 rounded border border-brand primary justify-center items-center gap-1 flex">
-              <div className="Container justify-center items-center gap-1 flex">
-                <div className="IcMagnifier w-3 h-3 justify-center items-center flex" />
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Btn w-6 h-6 px-2 py-0.5 bg-color-0 rounded border border-brand primary justify-center items-center gap-1 flex">
-              <div className="Container justify-center items-center gap-1 flex">
-                <div className="IcMagnifier w-3 h-3 justify-center items-center flex" />
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Btn w-6 h-6 px-2 py-0.5 bg-color-0 rounded border border-brand primary justify-center items-center gap-1 flex">
-              <div className="Container justify-center items-center gap-1 flex">
-                <div className="IcMagnifier w-3 h-3 justify-center items-center flex" />
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row flex-col justify-start items-start inline-flex">
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-    </div>
-    <div className="TableContent self-stretch justify-start items-start inline-flex">
-      <div className="Row flex-col justify-start items-start inline-flex">
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row w-12 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">1</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">2</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">3</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row grow shrink basis-0 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Ahnya</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">PT B</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Charlie Van Hoten</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row grow shrink basis-0 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Putyasn@gmail.com</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Putyasn@gmail.com</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Putyasn@gmail.com</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row grow shrink basis-0 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Tang City Club</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Grand City Mall Surabaya Club</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-0.5 inline-flex">
-            <div className="TigerWeeds grow shrink basis-0 text-color-900 text-sm font-normal font-['Inter'] leading-normal">Grand City Mall Surabaya Club</div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row w-28 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges px-2 py-0.5 bg-green-600/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-center items-center gap-2 flex">
-                <div className="Text text-center text-success text-xs font-semibold font-['Inter'] leading-tight">Psikolog</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges pl-1.5 pr-2 py-0.5 bg-neutral-800/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-start items-center gap-1.5 flex">
-                <div className="Text text-color-900 text-xs font-semibold font-['Inter'] leading-tight">Tim medis</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges px-2 py-0.5 bg-green-600/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-center items-center gap-2 flex">
-                <div className="Text text-center text-success text-xs font-semibold font-['Inter'] leading-tight">Psikolog</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row w-28 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges px-2 py-0.5 bg-green-600/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-center items-center gap-2 flex">
-                <div className="Text text-center text-success text-xs font-semibold font-['Inter'] leading-tight">Active</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges pl-1.5 pr-2 py-0.5 bg-neutral-800/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-start items-center gap-1.5 flex">
-                <div className="Text text-color-900 text-xs font-semibold font-['Inter'] leading-tight">Inactive</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Badges px-2 py-0.5 bg-green-600/10 rounded justify-center items-center gap-2.5 flex">
-              <div className="Content justify-center items-center gap-2 flex">
-                <div className="Text text-center text-success text-xs font-semibold font-['Inter'] leading-tight">Active</div>
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row w-14 flex-col justify-start items-start inline-flex">
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Btn w-6 h-6 px-2 py-0.5 bg-color-0 rounded border border-brand primary justify-center items-center gap-1 flex">
-              <div className="Container justify-center items-center gap-1 flex">
-                <div className="IcMagnifier w-3 h-3 justify-center items-center flex" />
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Btn w-6 h-6 px-2 py-0.5 bg-color-0 rounded border border-brand primary justify-center items-center gap-1 flex">
-              <div className="Container justify-center items-center gap-1 flex">
-                <div className="IcMagnifier w-3 h-3 justify-center items-center flex" />
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td self-stretch h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4 justify-start items-center gap-2 inline-flex">
-            <div className="Btn w-6 h-6 px-2 py-0.5 bg-color-0 rounded border border-brand primary justify-center items-center gap-1 flex">
-              <div className="Container justify-center items-center gap-1 flex">
-                <div className="IcMagnifier w-3 h-3 justify-center items-center flex" />
-              </div>
-            </div>
-          </div>
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-      <div className="Row flex-col justify-start items-start inline-flex">
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-        <div className="Td w-4 h-14 bg-color-0 border flex-col justify-start items-start flex">
-          <div className="TextContainer self-stretch grow shrink basis-0 px-4" />
-          <div className="Line self-stretch p-2.5 bg-color-50" />
-        </div>
-      </div>
-    </div>
-  </div>
-  <div className="Pagination self-stretch h-11 p-3.5 justify-between items-start inline-flex">
-    <div className="Frame6361 justify-start items-start gap-2 flex">
-      <div className="Frame6359 px-2 py-1 rounded-md border border-color-600 justify-start items-center gap-2 flex">
-        <div className=" text-color-600 text-sm font-normal font-['Inter'] leading-none">10</div>
-        <div className="IcDropDown w-4 h-4 px-0.5 pt-1.5 pb-1 justify-center items-center flex" />
-      </div>
-      <div className="Showing1To10Of30Entries text-color-600 text-sm font-normal font-['Inter'] leading-normal">Showing 1 to 10 of 30 entries</div>
-    </div>
-    <div className="Frame6358 justify-start items-start gap-0.5 flex">
-      <div className="Frame6354 w-5 h-5 p-1 justify-center items-center flex">
-        <div className="IcDoubleLeft grow shrink basis-0 self-stretch px-0.5 py-0.5 justify-center items-start gap-px inline-flex" />
-      </div>
-      <div className="Frame6355 w-5 h-5 p-1 justify-center items-center flex">
-        <div className="Icon20PxCaretleft grow shrink basis-0 self-stretch px-1 py-0.5 justify-center items-center inline-flex" />
-      </div>
-      <div className="Frame6351 h-5 px-1.5 py-0.5 bg-Color1 rounded-md justify-center items-center flex">
-        <div className=" text-color-0 text-sm font-normal font-['Inter'] leading-none">1</div>
-      </div>
-      <div className="Frame6352 pl-1.5 pr-1 py-0.5 bg-blue-600/0 rounded-md justify-center items-center flex">
-        <div className=" text-color-600 text-sm font-normal font-['Inter'] leading-none">2</div>
-      </div>
-      <div className="Frame6353 pl-1 pr-1.5 py-0.5 bg-blue-600/0 rounded-md justify-center items-center flex">
-        <div className=" text-color-600 text-sm font-normal font-['Inter'] leading-none">3</div>
-      </div>
-      <div className="Frame6356 w-5 h-5 p-1 justify-center items-center flex">
-        <div className="Icon20PxCaretright grow shrink basis-0 self-stretch px-1 py-0.5 justify-center items-center inline-flex" />
-      </div>
-      <div className="Frame6357 w-5 h-5 p-1 justify-center items-center flex">
-        <div className="IcDoubleRight grow shrink basis-0 self-stretch px-0.5 py-0.5 justify-center items-start gap-px inline-flex" />
-      </div>
-    </div>
-  </div>
-</div>
   );
-}
-  
-  export default Tableadmin;
-  
-  
+};
+
+export default TableAdmin;

@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "../component/navbar";
 import Chat from "../component/chatbubble";
 import ChatList from "../component/ChatList";
 import Opsichat from "../component/opsichat";
+import Navbar_User from "../component/navbaruser";
 
 function Pengaduananonymous() {
   return (
@@ -11,7 +11,7 @@ function Pengaduananonymous() {
         className="flex
      "
       >
-        <Navbar />
+        <Navbar_User />
         <ChatList />
       </div>
       <div className="w-full">

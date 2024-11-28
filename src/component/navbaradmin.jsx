@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
- export default function Navbar({halaman}){
+ export default function NavbarAdmin({halaman}){
   const [activeItem, setActiveItem] = useState(halaman);
   const [isOpen, setIsOpen] = useState(true); // State untuk mengontrol sidebar
   const navigate = useNavigate();

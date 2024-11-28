@@ -1,12 +1,14 @@
 import React from "react";
-import Navbar from "../../component/navbar";
-import Tableadmin from "../../component/tableadmin";
+import Navbar_Admin from "../../component/navbaradmin";
+// import Tableadmin from "../../component/tableadmin";
+import TablePeta from "../../component/tablepeta";
 
 function Admin() {
     return (
-        <>
-            <Navbar />
-            <Tableadmin />
+        <> <div className="flex ">
+            <Navbar_Admin />
+            <TablePeta />
+            </div>
         </>
     );
 }
