@@ -17,6 +17,7 @@ import { useNavigate } from "react-router-dom";
     console.log("Navigating to:", name); 
     if (activeItem !== name) {
       setActiveItem(name);
+      navigate(path)  // redirect ke path yang dipilih
     }
   };
   useEffect(() => {
@@ -90,7 +91,10 @@ import { useNavigate } from "react-router-dom";
           className={`relative w-full duration-500 px-4 py-3 mb-10 cursor-pointer flex items-center gap-4 ${
             activeItem === "Log Out" ? "bg-stone-500 text-white" : "text-stone-900"
           }`}
-          onClick={() => navigate("/landingpage")}
+          onClick={() => {
+            localStorage.removeItem("token"); // menghapus token saat logout
+            navigate("/landingpage")}
+          }
         >
           {/* Log Out Icon */}
           <img src="keluar.png" alt="Log Out icon" className="w-6 h-6" />

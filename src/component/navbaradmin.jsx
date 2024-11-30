@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 
- export default function NavbarAdmin({halaman}){
+export default function NavbarAdmin({ halaman }) {
   const [activeItem, setActiveItem] = useState(halaman);
   const [isOpen, setIsOpen] = useState(true); // State untuk mengontrol sidebar
   const navigate = useNavigate();
@@ -14,9 +14,9 @@ import { useNavigate } from "react-router-dom";
   ];
 
   const handleNavigation = (name, path) => {
-    console.log("Navigating to:", name); 
     if (activeItem !== name) {
       setActiveItem(name);
+      navigate(path) // redirect ke halaman yang dipilih
     }
   };
   useEffect(() => {
@@ -28,7 +28,7 @@ import { useNavigate } from "react-router-dom";
       <div
         className={`Sidebar flex-none h-screen pt-20 relative flex flex-col items-center gap-8 bg-gradient-to-b from-purple-200 to-purple-900 duration-500 ${
           isOpen ? "w-72" : "w-20"
-        }`}
+          }`}
       >
         {/* Toggle Button */}
         <button
@@ -62,26 +62,26 @@ import { useNavigate } from "react-router-dom";
         <div className="space-y-2 flex-grow w-full relative">
           {menuItems.map((item) => (
             <div
-            key={`${item.name}`} // Key menggabungkan nama dan activeItem untuk memaksa re-render
-            className="relative"
-            onClick={(e) => {
-              e.stopPropagation();
-              handleNavigation(item.name, item.path);
-            }}
-          >
-            <div
-              className={`Item w-full duration-500 px-4 py-3 flex items-center gap-4 cursor-pointer ${
-                activeItem == item.name ? "bg-stone-700 text-white" : " text-stone-900"
-              }`}
+              key={`${item.name}`} // Key menggabungkan nama dan activeItem untuk memaksa re-render
+              className="relative"
+              onClick={(e) => {
+                e.stopPropagation();
+                handleNavigation(item.name, item.path);
+              }}
             >
-              <img src={item.icon} alt={`${item.name} icon`} className="w-6 h-6" />
-              {isOpen ? item.name : <span>{}</span>}
-              {/* Rectangle sebelah kanan */}
-              {activeItem === item.name && isOpen && (
+              <div
+                className={`Item w-full duration-500 px-4 py-3 flex items-center gap-4 cursor-pointer ${ 
+                  activeItem == item.name ? "bg-stone-700 text-white" : " text-stone-900"
+                  }`}
+              >
+                <img src={item.icon} alt={`${item.name} icon`} className="w-6 h-6" />
+                {isOpen ? item.name : <span>{}</span>}
+                {/* Rectangle sebelah kanan */}
+                {activeItem === item.name && isOpen && (
                   <div className="Rectangle11 w-2 h-full bg-stone-200 absolute right-0 top-0" />
                 )}
+              </div>
             </div>
-          </div>
           ))}
         </div>
 
@@ -89,8 +89,11 @@ import { useNavigate } from "react-router-dom";
         <div
           className={`relative w-full duration-500 px-4 py-3 mb-10 cursor-pointer flex items-center gap-4 ${
             activeItem === "Log Out" ? "bg-stone-500 text-white" : "text-stone-900"
-          }`}
-          onClick={() => navigate("/landingpage")}
+            }`}
+          onClick={() => {
+            localStorage.removeItem("token"); // menghapus token saat logout
+            navigate("/landingpage")
+          }}
         >
           {/* Log Out Icon */}
           <img src="keluar.png" alt="Log Out icon" className="w-6 h-6" />
