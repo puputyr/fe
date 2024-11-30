@@ -1,4 +1,7 @@
 import React, { useState } from "react";
+import { FaEdit } from "react-icons/fa";
+import { FaRegTrashAlt } from 'react-icons/fa';
+
 
 const TablePeta = () => {
   const initialPeta = [
@@ -21,9 +24,7 @@ const TablePeta = () => {
     e.preventDefault();
     if (isEditing) {
       setPetaData(
-        petaData.map((peta) =>
-          peta.id === form.id ? { ...form } : peta
-        )
+        petaData.map((peta) => (peta.id === form.id ? { ...form } : peta))
       );
       setIsEditing(false);
     } else {
@@ -47,10 +48,7 @@ const TablePeta = () => {
   return (
     <div className="p-6 w-full h-screen overflow-scroll">
       <h1 className="text-2xl font-semibold mb-4">Data Peta</h1>
-      <form
-        onSubmit={handleFormSubmit}
-        className="mb-6 flex gap-4 items-end"
-      >
+      <form onSubmit={handleFormSubmit} className="mb-6 flex gap-4 items-end">
         <div>
           <label className="block text-sm font-medium mb-1">Lokasi</label>
           <input
@@ -78,9 +76,7 @@ const TablePeta = () => {
         <button
           type="submit"
           className={`px-4 py-2 rounded ${
-            isEditing
-              ? "bg-purple-900 text-white"
-              : "bg-purple-900 text-white"
+            isEditing ? "bg-purple-900 text-white" : "bg-purple-900 text-white"
           }`}
         >
           {isEditing ? "Update" : "Add"}
@@ -100,20 +96,24 @@ const TablePeta = () => {
           {petaData.map((peta) => (
             <tr key={peta.id} className="text-center">
               <td className="border border-gray-300 px-4 py-2">{peta.id}</td>
-              <td className="border border-gray-300 px-4 py-2">{peta.lokasi}</td>
-              <td className="border border-gray-300 px-4 py-2">{peta.koordinat}</td>
+              <td className="border border-gray-300 px-4 py-2">
+                {peta.lokasi}
+              </td>
+              <td className="border border-gray-300 px-4 py-2">
+                {peta.koordinat}
+              </td>
               <td className="border border-gray-300 px-4 py-2">
                 <button
                   onClick={() => handleEdit(peta.id)}
                   className="text-blue-600 px-2"
                 >
-                  ✏️
+                  <FaEdit />
                 </button>
                 <button
                   onClick={() => handleDelete(peta.id)}
                   className="text-red-600 px-2"
                 >
-                  🗑️
+                  <FaRegTrashAlt />
                 </button>
               </td>
             </tr>

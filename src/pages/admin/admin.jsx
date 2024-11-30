@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import Navbar_Admin from "../../component/navbaradmin";
-// import Tableadmin from "../../component/tableadmin";
 import TablePeta from "../../component/tablepeta";
+import TableAdmin from "../../component/tableadmin";
 import { useNavigate } from "react-router-dom";
 
 function Admin() {
@@ -20,7 +20,8 @@ function Admin() {
     return (
         <> <div className="flex ">
             <Navbar_Admin />
-            <TablePeta />
+            {/* <TablePeta /> */}
+            <TableAdmin />
         </div>
         </>
     );

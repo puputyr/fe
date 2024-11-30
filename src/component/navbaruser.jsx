@@ -1,16 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoClose } from "react-icons/io5";
  export default function Navbar_User({halaman}){
   const [activeItem, setActiveItem] = useState(halaman);
   const [isOpen, setIsOpen] = useState(true); // State untuk mengontrol sidebar
   const navigate = useNavigate();
 
   const menuItems = [
-    { name: "Peta Interaktif", path: "/halpeta", icon: "lgpeta.png" },
-    { name: "Pengaduan dan Dukungan", path: "/pengaduantim", icon: "lgcs.png" },
-    { name: "History", path: "/history", icon: "lghistori.png" },
-    { name: "Settings", path: "/settings", icon: "setting.png" },
+    { name: "Peta Interaktif", path: "/halpeta", icon: "/lgpeta.png" },
+    { name: "Pengaduan dan Dukungan", path: "/pengaduantim", icon: "/lgcs.png" },
+    { name: "History", path: "/history", icon: "/lghistori.png" },
+    { name: "Settings", path: "/settings", icon: "/setting.png" },
   ];
 
   const handleNavigation = (name, path) => {
@@ -36,11 +37,11 @@ import { useNavigate } from "react-router-dom";
           onClick={() => setIsOpen(!isOpen)}
           className="absolute top-5 left-5 text-white px-2 py-1 rounded"
         >
-          <img
-            src={isOpen ? "./x.png" : "./side.png"}
-            alt={isOpen ? "Close Sidebar" : "Open Sidebar"}
-            className="w-6 h-6"
-          />
+       {isOpen ? (
+            <IoClose className="w-6 h-6 text-gray-500" />
+          ) : (
+            <GiHamburgerMenu className="w-6 h-6 text-gray-500" />
+          )}
         </button>
 
         {/* Profile Picture */}
