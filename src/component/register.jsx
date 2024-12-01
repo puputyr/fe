@@ -1,13 +1,13 @@
 import { useState } from "react";
 import PopupNotification from "./popuploginregister";
-import ProvinsiList from "./provinsilist";
+// import ProvinsiList from "./ProvinsiList";
 
 function Register() {
   // State untuk input
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  const [provinsi, setProvinsi] = useState(""); // Tambahkan state untuk provinsi
+  // const [provinsi, setProvinsi] = useState(""); // Tambahkan state untuk provinsi
   const [popupRegister, setPopupRegister] = useState(false);
   const [popupType, setPopupType] = useState(""); // Menyimpan tipe popup
 
@@ -17,9 +17,9 @@ function Register() {
   const handleRoleChange = (e) => setRole(e.target.value);
 
   // Handler untuk pemilihan provinsi
-  const handleProvinsiSelect = (selectedProvinsi) => {
-    setProvinsi(selectedProvinsi.nama); // Menyimpan nama provinsi
-  };
+  // const handleProvinsiSelect = (selectedProvinsi) => {
+  //   setProvinsi(selectedProvinsi.nama); // Menyimpan nama provinsi
+  // };
 
   // Handler untuk form submit
   const handleSubmit = (e) => {
@@ -38,9 +38,9 @@ function Register() {
       setPopupRegister(true);
       setPopupType("roleEmpty");
       return; // Menghentikan eksekusi lebih lanjut
-    } else if (provinsi === "") {
-      setPopupRegister(true);
-      setPopupType("provinsiEmpty");
+    // } else if (provinsi === "") {
+    //   setPopupRegister(true);
+    //   setPopupType("provinsiEmpty");
       return; // Validasi provinsi
     }
 
@@ -49,7 +49,7 @@ function Register() {
     setPopupType("registerSuccess"); // Menampilkan popup registrasi sukses
 
     // Implementasi pengiriman data ke server atau logika lainnya
-    console.log({ username, password, role, provinsi });
+    console.log({ username, password, role });
   };
 
   return (
@@ -84,8 +84,8 @@ function Register() {
               <option value="user">User</option>
               <option value="psikolog">Psikolog</option>
             </select>
-            {/* Provinsi List */}
-            <ProvinsiList onProvinsiSelect={handleProvinsiSelect} />
+            {/* Provinsi List
+            <ProvinsiList onProvinsiSelect={handleProvinsiSelect} /> */}
             <button
               type="submit"
               className="w-full bg-purple-800 text-white p-3 rounded-lg font-bold shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-900"
