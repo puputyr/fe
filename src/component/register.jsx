@@ -1,5 +1,7 @@
 import { useState } from "react";
 import PopupNotification from "./popuploginregister";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
 // import ProvinsiList from "./ProvinsiList";
 
 function Register() {
@@ -20,7 +22,16 @@ function Register() {
   // const handleProvinsiSelect = (selectedProvinsi) => {
   //   setProvinsi(selectedProvinsi.nama); // Menyimpan nama provinsi
   // };
+  const navigate = useNavigate();
 
+  const handleCallbackRegister = () => {
+    if (role === "admin") {
+      navigate("/pages/admin");
+    } else if (role === "psikolog") {
+      navigate("/halpeta");
+    }
+  
+  };
   // Handler untuk form submit
   const handleSubmit = (e) => {
     e.preventDefault(); // Mencegah reload halaman saat submit
@@ -38,9 +49,9 @@ function Register() {
       setPopupRegister(true);
       setPopupType("roleEmpty");
       return; // Menghentikan eksekusi lebih lanjut
-    // } else if (provinsi === "") {
-    //   setPopupRegister(true);
-    //   setPopupType("provinsiEmpty");
+      // } else if (provinsi === "") {
+      //   setPopupRegister(true);
+      //   setPopupType("provinsiEmpty");
       return; // Validasi provinsi
     }
 
@@ -50,13 +61,36 @@ function Register() {
 
     // Implementasi pengiriman data ke server atau logika lainnya
     console.log({ username, password, role });
+    //
+    // Konfigurasi endpoint API expressjs
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+
+    // Fungsi untuk mengirimkan permintaan POST
+    axios
+      .post(
+        "http://localhost:5000/register",
+        { name: username, password, role },
+        config
+      )
+      .then((response) => {
+        console.log("Response:", response.data);
+      })
+      .catch((error) => {
+        console.error("Error:", error.message);
+      });
   };
 
   return (
     <>
       <div className="bg-gradient-to-b from-purple-200 to-purple-900 min-h-screen flex items-center justify-center">
         <div className="bg-gradient-to-b from-purple-200 p-8 rounded-xl shadow-lg w-full max-w-md sm:p-6 md:p-8 space-y-4">
-          <h2 className="text-white text-2xl font-bold text-center">Register</h2>
+          <h2 className="text-white text-2xl font-bold text-center">
+            Register
+          </h2>
           <form onSubmit={handleSubmit} className="space-y-4">
             <input
               type="text"
@@ -106,6 +140,8 @@ function Register() {
           popUp={popupRegister}
           type={popupType}
           setPopup={setPopupRegister}
+          data={{ name: username, password: password, role: role }}
+          Callback={handleCallbackRegister}
         />
       )}
     </>
