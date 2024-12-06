@@ -9,7 +9,9 @@ function Register() {
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState("");
-  // const [provinsi, setProvinsi] = useState(""); // Tambahkan state untuk provinsi
+  const [no_whatsapp, setNo_whatsapp] = useState("");
+  const [profilePicture, setProfilePicture] = useState(null);
+
   const [popupRegister, setPopupRegister] = useState(false);
   const [popupType, setPopupType] = useState(""); // Menyimpan tipe popup
 
@@ -17,11 +19,14 @@ function Register() {
   const handleUsernameChange = (e) => setUsername(e.target.value);
   const handlePasswordChange = (e) => setPassword(e.target.value);
   const handleRoleChange = (e) => setRole(e.target.value);
-
-  // Handler untuk pemilihan provinsi
-  // const handleProvinsiSelect = (selectedProvinsi) => {
-  //   setProvinsi(selectedProvinsi.nama); // Menyimpan nama provinsi
-  // };
+  const handleNo_whatsappChange = (e) => setNo_whatsapp(e.target.value);
+  const handleProfilePictureChange = (e) => {
+    const file = e.target.files[0];
+    if (file) {
+      setProfilePicture(file);
+    }
+  };
+  
   const navigate = useNavigate();
 
   const handleCallbackRegister = () => {
@@ -30,7 +35,6 @@ function Register() {
     } else if (role === "psikolog") {
       navigate("/halpeta");
     }
-  
   };
   // Handler untuk form submit
   const handleSubmit = (e) => {
@@ -48,12 +52,11 @@ function Register() {
     } else if (role === "") {
       setPopupRegister(true);
       setPopupType("roleEmpty");
-      return; // Menghentikan eksekusi lebih lanjut
-      // } else if (provinsi === "") {
-      //   setPopupRegister(true);
-      //   setPopupType("provinsiEmpty");
-      return; // Validasi provinsi
-    }
+      return;
+    } else if ( no_whatsapp === "") {
+      setPopupRegister(true);
+      setPopupType("no_whatsappEmpty");
+      return;}
 
     // Jika registrasi berhasil
     setPopupRegister(true);
@@ -63,17 +66,26 @@ function Register() {
     console.log({ username, password, role });
     //
     // Konfigurasi endpoint API expressjs
+    console.log(profilePicture);
+    const formData = new FormData();
+    formData.append("name", username);
+    formData.append("password", password);
+    formData.append("role", role);
+    formData.append("no_whatsapp", no_whatsapp);
+
+    if (true) {
+      formData.append("img", profilePicture);
+    }
     const config = {
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "multipart/form-data",
       },
     };
 
     // Fungsi untuk mengirimkan permintaan POST
     axios
       .post(
-        "http://localhost:5000/register",
-        { name: username, password, role },
+        "http://localhost:5000/register", formData,
         config
       )
       .then((response) => {
@@ -106,6 +118,13 @@ function Register() {
               onChange={handlePasswordChange}
               className="w-full p-3 rounded-lg bg-beige-200 placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-900"
             />
+            <input
+              type="text"
+              placeholder="No whatsapp aktif"
+              value={no_whatsapp}
+              onChange={handleNo_whatsappChange}
+              className="w-full p-3 rounded-lg bg-beige-200 placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-900"
+            />
             <select
               value={role}
               onChange={handleRoleChange}
@@ -114,12 +133,17 @@ function Register() {
               <option value="" disabled>
                 Select Role
               </option>
-              <option value="admin">Admin</option>
-              <option value="user">User</option>
+              <option value="tim medis">Tim Medis</option>
+              <option value="tim keamanan">Tim Keamanan</option>
               <option value="psikolog">Psikolog</option>
+              <option value="umum">Umum</option>
             </select>
-            {/* Provinsi List
-            <ProvinsiList onProvinsiSelect={handleProvinsiSelect} /> */}
+            <input
+              type="file"
+              accept="image/*"
+              onChange={handleProfilePictureChange}
+              className="w-full p-3 rounded-lg bg-beige-200 placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-900"
+            />
             <button
               type="submit"
               className="w-full bg-purple-800 text-white p-3 rounded-lg font-bold shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-900"
