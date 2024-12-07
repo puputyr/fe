@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
+
  export default function Navbar_User({halaman}){
   const [activeItem, setActiveItem] = useState(halaman);
   const [isOpen, setIsOpen] = useState(true); // State untuk mengontrol sidebar
@@ -11,7 +12,7 @@ import { IoClose } from "react-icons/io5";
     { name: "Peta Interaktif", path: "/halpeta", icon: "/lgpeta.png" },
     { name: "Pengaduan dan Dukungan", path: "/pengaduantim", icon: "/lgcs.png" },
     { name: "History", path: "/history", icon: "/lghistori.png" },
-    { name: "Settings", path: "/settings", icon: "/setting.png" },
+    { name: "Settings", path: "/halsetting", icon: "/setting.png" },
   ];
 
   const handleNavigation = (name, path) => {

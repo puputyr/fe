@@ -9,6 +9,7 @@ import Halpeta from "./pages/halpeta";
 import Admin from "./pages/admin/admin";
 import "leaflet/dist/leaflet.css";
 import Loginpage from "./pages/hallogin";
+import Settingpage from "./pages/halsetting";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/pengaduantim" element={<Pengaduantim />} />
           <Route path="/pengaduananonymous" element={<Pengaduananonymous />} />
           <Route path="/halpeta" element={<Halpeta />} />
+          <Route path="/halsetting" element={<Settingpage />} />
           <Route path="/landingpage" element={<Landingpage />} />
           <Route path="/pages/admin" element={<Admin />} /> 
         </Routes>

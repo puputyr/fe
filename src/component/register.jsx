@@ -26,16 +26,21 @@ function Register() {
       setProfilePicture(file);
     }
   };
-  
+
   const navigate = useNavigate();
 
   const handleCallbackRegister = () => {
-    if (role === "admin") {
-      navigate("/pages/admin");
-    } else if (role === "psikolog") {
+    if (role === "psikolog") {
       navigate("/halpeta");
+    } else if (role === "tim medis") {
+      navigate("/halpeta"); // Sesuaikan dengan rute yang relevan
+    } else if (role === "tim keamanan") {
+      navigate("/halpeta"); // Sesuaikan dengan rute yang relevan
+    } else if (role === "umum") {
+      navigate("/pengaduananonymous"); // Sesuaikan dengan rute yang relevan
     }
   };
+  
   // Handler untuk form submit
   const handleSubmit = (e) => {
     e.preventDefault(); // Mencegah reload halaman saat submit
@@ -53,10 +58,11 @@ function Register() {
       setPopupRegister(true);
       setPopupType("roleEmpty");
       return;
-    } else if ( no_whatsapp === "") {
+    } else if (no_whatsapp === "") {
       setPopupRegister(true);
       setPopupType("no_whatsappEmpty");
-      return;}
+      return;
+    }
 
     // Jika registrasi berhasil
     setPopupRegister(true);
@@ -84,10 +90,7 @@ function Register() {
 
     // Fungsi untuk mengirimkan permintaan POST
     axios
-      .post(
-        "http://localhost:5000/register", formData,
-        config
-      )
+      .post("http://localhost:5000/register", formData, config)
       .then((response) => {
         console.log("Response:", response.data);
       })
@@ -138,12 +141,20 @@ function Register() {
               <option value="psikolog">Psikolog</option>
               <option value="umum">Umum</option>
             </select>
-            <input
-              type="file"
-              accept="image/*"
-              onChange={handleProfilePictureChange}
-              className="w-full p-3 rounded-lg bg-beige-200 placeholder-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-900"
-            />
+            <label
+              htmlFor="profilePicInput"
+              className="w-full p-3 bg-white rounded-lg bg-beige-200 text-gray-700 focus:outline-none focus:ring-2 focus:ring-purple-900 flex items-center justify-between"
+            >
+              <input
+                type="file"
+                accept="image/*"
+                onChange={handleProfilePictureChange}
+                id="profilePicInput"
+                className="w-full h-full bg-white bg-beige-200 text-gray-700"
+              />
+              <span className="text-gray-700 ml-3">Tambahkan Foto Profil</span>
+            </label>
+
             <button
               type="submit"
               className="w-full bg-purple-800 text-white p-3 rounded-lg font-bold shadow-md hover:bg-purple-700 focus:outline-none focus:ring-2 focus:ring-purple-900"
